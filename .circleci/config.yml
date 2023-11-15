@@ -4,43 +4,38 @@
 version: 2.1
 
 # Default configuration
-defaults: &defaults # Working_directory: ~/app
-  working_directory: ~/app
+defaults: &defaults
+  working_directory: ~/app # Working_directory: ~/app
   # Docker image that will be used
   docker:
-    - image: cimg/python:3.11 # Python 3.11
+  - image: cimg/python:3.11 # Python 3.11
 
 # Jobs that will be executed
 jobs:
   # Job name
   test-app:
     # Default configuration
-    <<: *defaults
+    !!merge <<: *defaults
     # Steps that will be executed
     steps:
-      # Checkout the code from the repository
-      - checkout
-      # Install dependencies
-      - run:
-          name: Install dependencies
-          command: |
-            pip install -r requirements.txt
-      # Export environment variables
-      - run:
-          name: Export environment variables
-          command: |
-            export PYTHONPATH=$PYTHONPATH:$(pwd)
-      # Run linter pylint and flake8
-      - run:
-          name: Run linter
-          command: |
-            pylint src/calculator.py
-            flake8 --exclude=venv* --statistics
-      # Run test coverage with pytest
-      - run:
-          name: Run tests
-          command: |
-            pytest -v --cov=calculator
+    # Checkout the code from the repository
+    - checkout
+    # Install dependencies
+    - run:
+        name: Install dependencies
+        command: |
+          pip install -r requirements.txt
+    # Run linter pylint and flake8
+    - run:
+        name: Run linter
+        command: |
+          pylint src/calculator.py
+          flake8 --exclude=venv* --statistics
+    # Run test coverage with pytest
+    - run:
+        name: Run tests
+        command: |
+          pytest -v --cov=calculator
 
 # Workflows that will be executed
 workflows:
@@ -48,5 +43,5 @@ workflows:
   test-app-deploy:
     # Jobs that will be executed
     jobs:
-      # Job name
-      - test-app
+    # Job name
+    - test-app

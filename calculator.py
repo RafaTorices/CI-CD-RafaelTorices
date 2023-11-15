@@ -1,5 +1,5 @@
-# main.py
-# Python Application for the myapp project (main.py)
+# calculator.py
+# Python Application for the myapp project.
 # Example Python calculator application
 
 

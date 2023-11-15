@@ -5,7 +5,7 @@ version: 2.1
 # Jobs that will be executed
 jobs:
   # Job name
-  build:
+  test-app:
     # Docker image
     docker:
       - image: cimg/python:3.11 # Python 3.11
@@ -24,3 +24,8 @@ jobs:
           name: Run tests
           command: |
             flake8 --exclude=venv* --statistics
+            # pytest -v --cov=calculator
+workflows:
+  test-app-deploy:
+    jobs:
+      - test-app

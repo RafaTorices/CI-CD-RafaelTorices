@@ -21,10 +21,14 @@ jobs:
           command: |
             pip install -r requirements.txt
       - run:
+          name: Run linter
+          command: |
+            pylint calculator
+            flake8 --exclude=venv* --statistics
+      - run:
           name: Run tests
           command: |
-            flake8 --exclude=venv* --statistics
-            # pytest -v --cov=calculator
+            pytest -v --cov=calculator
 workflows:
   test-app-deploy:
     jobs:

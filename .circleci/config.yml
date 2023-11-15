@@ -1,0 +1,27 @@
+# CircleCI
+
+# Version CircleCI
+version: 2.1
+# Jobs that will be executed
+jobs:
+  # Job name
+  build:
+    # Docker image
+    docker:
+      - image: cimg/python:3.11 # Python 3.11
+    # Directory where the code will be executed
+    working_directory: ~/app
+    # Steps that will be executed
+    steps:
+      # Checkout the code from the repository
+      - checkout
+      # Install dependencies and run tests
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+      - run:
+          name: Run tests
+          command: |
+            flake8 --exclude=venv* --statistics
+            pytest -v --cov=calculator

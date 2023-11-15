@@ -2,15 +2,20 @@
 
 # Version CircleCI
 version: 2.1
+
+# Default configuration
+defaults: &defaults # Working_directory: ~/app
+  working_directory: ~/app
+  # Docker image that will be used
+  docker:
+    - image: cimg/python:3.11 # Python 3.11
+
 # Jobs that will be executed
 jobs:
   # Job name
   test-app:
-    # Docker image
-    docker:
-      - image: cimg/python:3.11 # Python 3.11
-    # Directory where the code will be executed
-    working_directory: ~/app
+    # Default configuration
+    <<: *defaults
     # Steps that will be executed
     steps:
       # Checkout the code from the repository
@@ -31,6 +36,7 @@ jobs:
           name: Run tests
           command: |
             pytest -v --cov=calculator
+
 # Workflows that will be executed
 workflows:
   # Workflow name

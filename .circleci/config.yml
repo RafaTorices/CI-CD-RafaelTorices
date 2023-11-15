@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Export environment variables
           command: |
-            export PYTHONPATH="src/"
+            export PYTHONPATH=$(pwd)
       # Run linter pylint and flake8
       - run:
           name: Run linter

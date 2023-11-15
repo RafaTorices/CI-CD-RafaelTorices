@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Run linter
           command: |
-            pylint calculator
+            pylint src/calculator
             flake8 --exclude=venv* --statistics
       # Run test coverage with pytest
       - run:

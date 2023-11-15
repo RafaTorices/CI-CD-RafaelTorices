@@ -15,21 +15,27 @@ jobs:
     steps:
       # Checkout the code from the repository
       - checkout
-      # Install dependencies and run tests
+      # Install dependencies
       - run:
           name: Install dependencies
           command: |
             pip install -r requirements.txt
+      # Run linter pylint and flake8
       - run:
           name: Run linter
           command: |
             pylint calculator
             flake8 --exclude=venv* --statistics
+      # Run test coverage with pytest
       - run:
           name: Run tests
           command: |
             pytest -v --cov=calculator
+# Workflows that will be executed
 workflows:
+  # Workflow name
   test-app-deploy:
+    # Jobs that will be executed
     jobs:
+      # Job name
       - test-app

@@ -25,11 +25,16 @@ jobs:
           name: Install dependencies
           command: |
             pip install -r requirements.txt
+      # Export environment variables
+      - run:
+          name: Export environment variables
+          command: |
+            export PYTHONPATH="$(pwd)/src"
       # Run linter pylint and flake8
       - run:
           name: Run linter
           command: |
-            pylint ./src/calculator
+            pylint src/calculator.py
             flake8 --exclude=venv* --statistics
       # Run test coverage with pytest
       - run:

@@ -7,12 +7,6 @@ Calculator functions for doing math operations on numbers.
 """
 
 
-class Calculator:
-    """
-    Class to represent the different choices of the calculator
-    """
-
-
 def calculator():
     """
     Function to run the calculator
@@ -245,5 +239,5 @@ def log_error(err):
 if __name__ == "__main__":
     try:
         calculator()
-    except Exception as error:
-        log_error(error)
+    except ZeroDivisionError as e:
+        log_error(e)

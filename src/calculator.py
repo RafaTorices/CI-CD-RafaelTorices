@@ -82,7 +82,8 @@ def read_user_choice():
 
 def operation(user_choice):
     """
-    Function to do the operation selected by the user whith the numbers introduced
+    Function to do the operation selected by the user whith the numbers
+    introduced
 
     Args:
         user_choice (int): User choice

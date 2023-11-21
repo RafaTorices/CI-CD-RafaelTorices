@@ -4,7 +4,7 @@
 File to test the calculator.py file
 """
 
-from src.calculator import add, subtract, multiply, divide
+from calculator import add, subtract, multiply, divide
 
 
 class TestCalculator:

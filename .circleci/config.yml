@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            pytest -v tests/test_calculator.py
+            pytest -v test_calculator.py
 
 # Workflows that will be executed
 workflows:

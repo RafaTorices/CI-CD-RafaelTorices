@@ -41,6 +41,23 @@ jobs:
             python3 -m pytest
             # Generate report html of test results
             python3 -m pytest --html=report.html
+  doc-app:
+    # Default configuration
+    <<: *defaults
+    # Steps that will be executed
+    steps:
+      # Checkout the code from the repository
+      - checkout
+      # Install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+      # Generate documentation with pdoc
+      - run:
+          name: Doc Pdoc
+          command: |
+            pdoc src/calculator.py -o ./docs
 # Workflows that will be executed
 workflows:
   # Workflow name
@@ -49,3 +66,8 @@ workflows:
     jobs:
       # Job name
       - test-app
+  doc-app-deploy:
+    # Jobs that will be executed
+    jobs:
+      # Job name
+      - doc-app

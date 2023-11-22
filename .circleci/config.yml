@@ -105,7 +105,7 @@ jobs:
           path: docs-html
           destination: docs-html
   # Job name
-  app-build-package:
+  app-deploy:
     # Default configuration
     <<: *defaults
     # Steps that will be executed
@@ -121,28 +121,6 @@ jobs:
             # Build package app
             pip install build
             python3 -m build
-      - persist_to_workspace:
-          root: ~/app
-          paths:
-            - .
-  # Job name
-  app-deploy:
-    # Default configuration
-    <<: *defaults
-    # Steps that will be executed
-    steps:
-      # Attach the workspace from the previous job for persisting data
-      - attach_workspace:
-          at: ~/app
-      - run:
-          name: Deploy App
-          command: |
-            ls -l
-            # Source env
-            source env/bin/activate
-            # Run app calculator
-            python3 -m pip install dist/calculator-1.0.0.tar.gz
-            calculator
 # Workflows that will be executed
 workflows:
   # Workflow name
@@ -157,14 +135,11 @@ workflows:
       - app-docs:
           requires:
             - app-tests
-      - app-build-package:
+      - app-deploy:
           requires:
             - app-build
             - app-tests
             - app-docs
-      - app-deploy:
-          requires:
-            - app-build-package
           filters:
             branches:
               only:

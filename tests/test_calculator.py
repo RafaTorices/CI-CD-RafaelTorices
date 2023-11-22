@@ -16,7 +16,7 @@ class TestCalculator:
         """
         Function to test the add function
         """
-        assert 4 == calculator.add(2, 2)
+        assert 4.5 == calculator.add(2.5, 2.0)
 
     def test_subtraction(self):
         """

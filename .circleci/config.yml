@@ -40,7 +40,7 @@ jobs:
           command: |
             python3 -m pytest
             # Generate report html of test results
-            python3 -m pytest --html=report.html
+            python3 -m pytest --html=./docs-tests/report.html
       - store_artifacts:
           path: docs-tests
           destination: docs-tests
@@ -61,10 +61,10 @@ jobs:
       - run:
           name: Doc Pdoc
           command: |
-            pdoc src/calculator.py -o ./docs
+            pdoc src/calculator.py -o ./docs-html
       - store_artifacts:
-          path: docs/html
-          destination: docs/html
+          path: docs-html
+          destination: docs-html
 # Workflows that will be executed
 workflows:
   # Workflow name

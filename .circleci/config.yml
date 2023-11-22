@@ -119,6 +119,7 @@ jobs:
             # Source env
             source env/bin/activate
             # Build package app
+            pip install build
             python3 -m build
   # Job name
   app-deploy:

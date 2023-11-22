@@ -19,8 +19,10 @@ jobs:
       # Checkout the code from the repository
       - checkout
       # Install package python3-pip for install dependencies
+      # Create virtual environment for python3
+      # Install dependencies with pip of requirements.txt
       - run:
-          name: Install pip
+          name: Install dependencies
           command: |
             sudo apt-get update
             sudo apt-get install python3-pip
@@ -28,9 +30,7 @@ jobs:
             python3 -m venv env
             source env/bin/activate
             pip install -r requirements.txt
-            ls -l
-            echo "hasta aqui"
-            ls -l ~/app
+      # Save the virtual environment for the next job for persisting data
       - persist_to_workspace:
           root: ~/app
           paths:
@@ -41,37 +41,42 @@ jobs:
     <<: *defaults
     # Steps that will be executed
     steps:
+      # Attach the workspace from the previous job for persisting data
       - attach_workspace:
           at: ~/app
       - run:
-          name: Source env
+          name: Run tests
           command: |
-            ls -l
-            ls -l ~/app
+            # Source env
             source env/bin/activate
+            # Run linter pylint to check code of app calculator.py
             pylint src/calculator.py
-      # Create directorys for test results
-      - run: mkdir docs-tests
-      - run: mkdir docs-test-reports
-      # Run linter pylint
-      # - run:
-      #     name: Run linter pylint
-      #     command: |
-      #       pylint src/calculator.py
       # Run test coverage with pytest
       - run:
           name: Run tests pytest coverage
           command: |
+            # Source env
+            source env/bin/activate
+            # Run test coverage with pytest
             coverage run -m pytest tests/test_calculator.py
             python3 -m pytest --cov=src
       # Run test with pytest
       - run:
           name: Run tests pytest
           command: |
+            # Source env
+            source env/bin/activate
+            # Run test with pytest
             python3 -m pytest
+            # Create directorys for test results
+            mkdir docs-test-reports
             # Generate report html of test results
             python3 -m pytest --html=./docs-tests-reports/report.html
+            # Create directorys for test results
+            mkdir docs-test
+            # Generate report xml of test results
             python3 -m pytest --junitxml=./docs-tests/report.xml
+      # Generate artifacts of test results
       - store_test_results:
           path: docs-tests/report.xml
       - store_artifacts:
@@ -83,19 +88,19 @@ jobs:
     <<: *defaults
     # Steps that will be executed
     steps:
+      # Attach the workspace from the previous job for persisting data
       - attach_workspace:
           at: ~/app
       - run:
-          name: Source env
+          name: Generate documentation
           command: |
+            # Create directorys for documentation of code app
+            mkdir docs-html
+            # Source env
             source env/bin/activate
-      # Create directorys for documentation of code app
-      - run: mkdir docs-html
-      # Generate documentation with pdoc
-      - run:
-          name: Doc Pdoc
-          command: |
+            # Generate documentation of code app with pdoc
             pdoc src/calculator.py -o ./docs-html
+      # Generate artifacts of documentation
       - store_artifacts:
           path: docs-html
           destination: docs-html

@@ -108,7 +108,7 @@ jobs:
 workflows:
   # Workflow name
   app-build-tests-docs:
-    # Jobs that will be executed
+    # Jobs that will be executed in the workflow
     jobs:
       # Job name
       - app-build:

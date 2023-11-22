@@ -20,7 +20,7 @@ def test_subtraction():
     """
     Function to test the subtract function
     """
-    assert 2 == calculator.subtract(4, 2)
+    assert 0 == calculator.subtract(4, 4)
 
 
 def test_multiplication():

@@ -31,14 +31,14 @@ jobs:
             ls -l
             echo "hasta aqui"
             ls -l ~/app
-      # - persist_to_workspace:
-      #     root: ~/app
-      #     paths:
-      #       - app
-      # - persist_to_workspace:
-      #     root: ~/app
-      #     paths:
-      #       - env
+      - persist_to_workspace:
+          root: /
+          paths:
+            - app
+      - persist_to_workspace:
+          root: /
+          paths:
+            - env
   # Job name
   app-tests:
     # Default configuration
@@ -50,6 +50,8 @@ jobs:
       - run:
           name: Source env
           command: |
+            ls -l
+            ls -l ~/app
             source env/bin/activate
       # Create directorys for test results
       - run: mkdir docs-tests

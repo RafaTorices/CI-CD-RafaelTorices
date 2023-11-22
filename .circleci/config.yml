@@ -111,10 +111,22 @@ workflows:
     # Jobs that will be executed
     jobs:
       # Job name
-      - app-build
+      - app-build:
+          filters:
+            branches:
+              only:
+                - develop
       - app-tests:
           requires:
             - app-build
+          filters:
+            branches:
+              only:
+                - develop
       - app-docs:
           requires:
             - app-tests
+          filters:
+            branches:
+              only:
+                - develop

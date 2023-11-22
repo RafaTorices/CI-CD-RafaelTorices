@@ -34,7 +34,7 @@ jobs:
       - persist_to_workspace:
           root: ~/app
           paths:
-            - ~/app
+            - .
   # Job name
   app-tests:
     # Default configuration

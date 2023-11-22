@@ -104,10 +104,27 @@ jobs:
       - store_artifacts:
           path: docs-html
           destination: docs-html
+  # Job name
+  app-deploy:
+    # Default configuration
+    <<: *defaults
+    # Steps that will be executed
+    steps:
+      - run:
+          name: Deploy App
+          command: |
+            # Source env
+            python3 -m venv env
+            source env/bin/activate
+            # Build package app
+            python3 -m build
+            # Run app
+            python3 -m pip install dist/calculator-1.0.0.tar.gz
+            calculator
 # Workflows that will be executed
 workflows:
   # Workflow name
-  app-build-tests-docs:
+  app-build-tests-docs-deploy:
     # Jobs that will be executed
     jobs:
       # Job name
@@ -130,3 +147,12 @@ workflows:
             branches:
               only:
                 - develop
+      - app-deploy:
+          requires:
+            - app-build
+            - app-tests
+            - app-docs
+          filters:
+            branches:
+              only:
+                - main

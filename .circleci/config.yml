@@ -80,6 +80,8 @@ jobs:
     <<: *defaults
     # Steps that will be executed
     steps:
+      - attach_workspace:
+          at: ~/app
       - run:
           name: Source env
           command: |

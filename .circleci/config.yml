@@ -40,10 +40,10 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/app
-      - run:
-          name: Source env
-          command: |
-            source env/bin/activate
+      # - run:
+      #     name: Source env
+      #     command: |
+      #       source env/bin/activate
       # Create directorys for test results
       - run: mkdir docs-tests
       - run: mkdir docs-test-reports

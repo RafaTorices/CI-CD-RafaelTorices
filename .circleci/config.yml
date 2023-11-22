@@ -18,6 +18,14 @@ jobs:
     steps:
       # Checkout the code from the repository
       - checkout
+      - run:
+          name: Install pip
+          command: |
+            sudo apt-get update
+            sudo apt-get install python3-pip
+      - run: mkdir docs-tests
+      - run: mkdir docs-html
+      - run: mkdir docs-test-reports
       # Install dependencies
       - run:
           name: Install dependencies
@@ -40,12 +48,12 @@ jobs:
           command: |
             python3 -m pytest
             # Generate report html of test results
-            python3 -m pytest --html=./docs-tests/report.html
+            python3 -m pytest --html=./docs-tests-reports/report.html
       - store_test_results:
-          path: test-results.xml
+          path: docs-tests/
       - store_artifacts:
-          path: docs-tests
-          destination: docs-tests
+          path: docs-tests-reports
+          destination: docs-tests-reports
   # Job name
   app-docs:
     # Default configuration

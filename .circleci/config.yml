@@ -170,7 +170,6 @@ workflows:
           filters:
             branches:
               only:
-                - develop
                 - main
       - app-deploy:
           requires:

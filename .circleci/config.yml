@@ -104,11 +104,42 @@ jobs:
       - store_artifacts:
           path: docs-html
           destination: docs-html
+  # Job name
+  app-build-package:
+    # Default configuration
+    <<: *defaults
+    # Steps that will be executed
+    steps:
+      # Attach the workspace from the previous job for persisting data
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Build package
+          command: |
+            # Source env
+            source env/bin/activate
+            # Build package app
+            python3 -m build
+  # Job name
+  app-deploy:
+    # Default configuration
+    <<: *defaults
+    # Steps that will be executed
+    steps:
+      # Attach the workspace from the previous job for persisting data
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Deploy App
+          command: |
+            # Run app
+            python3 -m pip install dist/calculator-1.0.0.tar.gz
+            calculator
 # Workflows that will be executed
 workflows:
   # Workflow name
-  app-build-tests-docs:
-    # Jobs that will be executed in the workflow
+  app-build-tests-docs-deploy:
+    # Jobs that will be executed
     jobs:
       # Job name
       - app-build:
@@ -130,3 +161,20 @@ workflows:
             branches:
               only:
                 - develop
+      - app-build-package:
+          requires:
+            - app-build
+            - app-tests
+            - app-docs
+          filters:
+            branches:
+              only:
+                - develop
+                - main
+      - app-deploy:
+          requires:
+            - app-build-package
+          filters:
+            branches:
+              only:
+                - main

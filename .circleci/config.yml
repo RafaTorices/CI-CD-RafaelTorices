@@ -49,14 +49,15 @@ jobs:
             ls -l
             ls -l ~/app
             source env/bin/activate
+            pylint src/calculator.py
       # Create directorys for test results
       - run: mkdir docs-tests
       - run: mkdir docs-test-reports
       # Run linter pylint
-      - run:
-          name: Run linter pylint
-          command: |
-            pylint src/calculator.py
+      # - run:
+      #     name: Run linter pylint
+      #     command: |
+      #       pylint src/calculator.py
       # Run test coverage with pytest
       - run:
           name: Run tests pytest coverage

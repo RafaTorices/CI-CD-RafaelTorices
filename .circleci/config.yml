@@ -49,8 +49,9 @@ jobs:
             python3 -m pytest
             # Generate report html of test results
             python3 -m pytest --html=./docs-tests-reports/report.html
+            python3 -m pytest --junitxml=./docs-tests/report.xml
       - store_test_results:
-          path: docs-tests/
+          path: docs-tests/report.xml
       - store_artifacts:
           path: docs-tests-reports
           destination: docs-tests-reports

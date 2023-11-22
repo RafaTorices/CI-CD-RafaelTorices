@@ -121,7 +121,10 @@ jobs:
             # Build package app
             pip install build
             python3 -m build
-            ls -l
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - .
   # Job name
   app-deploy:
     # Default configuration

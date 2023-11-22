@@ -28,8 +28,6 @@ jobs:
           name: Run linter pylint
           command: |
             pylint src/calculator.py
-      - store_test_results:
-          path: test-results-pylint.xml
       # Run test coverage with pytest
       - run:
           name: Run tests pytest coverage
@@ -43,6 +41,8 @@ jobs:
             python3 -m pytest
             # Generate report html of test results
             python3 -m pytest --html=./docs-tests/report.html
+      - store_test_results:
+          path: test-results.xml
       - store_artifacts:
           path: docs-tests
           destination: docs-tests

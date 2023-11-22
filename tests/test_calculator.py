@@ -1,37 +1,37 @@
 # Test file for calculator.py
+# Python App to do basic math operations
 
 """
 File to test the calculator.py file
 """
 
+# Import function of the calculator.py file
 from src import calculator
 
 
-class TestCalculator:
+def test_addition():
     """
-    Class to test the calculator.py file
+    Function to test the add function
     """
+    assert 4.5 == calculator.add(2.5, 2.0)
 
-    def test_addition(self):
-        """
-        Function to test the add function
-        """
-        assert 4.5 == calculator.add(2.5, 2.0)
 
-    def test_subtraction(self):
-        """
-        Function to test the subtract function
-        """
-        assert 2 == calculator.subtract(4, 2)
+def test_subtraction():
+    """
+    Function to test the subtract function
+    """
+    assert 2 == calculator.subtract(4, 2)
 
-    def test_multiplication(self):
-        """
-        Function to test the multiply function
-        """
-        assert 100 == calculator.multiply(10, 10)
 
-    def test_division(self):
-        """
-        Function to test the divide function
-        """
-        assert 5 == calculator.divide(25, 5)
+def test_multiplication():
+    """
+    Function to test the multiply function
+    """
+    assert 100 == calculator.multiply(10, 10)
+
+
+def test_division():
+    """
+    Function to test the divide function
+    """
+    assert 5 == calculator.divide(25, 5)

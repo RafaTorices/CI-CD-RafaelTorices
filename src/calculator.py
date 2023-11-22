@@ -1,6 +1,5 @@
 # Calculator.py
-# Python Application for the myapp project.
-# Example Python calculator application
+# Example Python calculator application in terminal
 
 """
 Calculator functions for doing math operations on numbers.

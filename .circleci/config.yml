@@ -11,24 +11,6 @@ defaults: &defaults
 # Jobs that will be executed
 jobs:
   # Job name
-  app-build:
-    # Default configuration
-    <<: *defaults
-    # Steps that will be executed
-    steps:
-      # Checkout the code from the repository
-      - checkout
-      # Install dependencies
-      - run:
-          name: Install dependencies
-          command: |
-            pip install -r requirements.txt
-      # Build the application
-      - run:
-          name: Build the application
-          command: |
-            python3 src/calculator.py
-  # Job name
   app-tests:
     # Default configuration
     <<: *defaults
@@ -85,12 +67,6 @@ jobs:
           destination: docs/html
 # Workflows that will be executed
 workflows:
-  # Workflow name
-  app-build-deploy:
-    # Jobs that will be executed
-    jobs:
-      # Job name
-      - app-build
   # Workflow name
   app-tests-deploy:
     # Jobs that will be executed

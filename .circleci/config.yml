@@ -121,6 +121,10 @@ jobs:
             # Build package app
             pip install build
             python3 -m build
+      - store_artifacts:
+          path: dist
+          destination: dist
+TODO: Create artefact of package app
 # Workflows that will be executed
 workflows:
   # Workflow name

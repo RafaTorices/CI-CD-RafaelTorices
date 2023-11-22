@@ -11,7 +11,7 @@ coverage # coverage run -m pytest tests/test_calculator.py
 # Pytest-cov is used to generate a coverage report
 pytest-cov # python3 -m pytest --cov=src
 # Pytest-html is used to generate a html report
-pytest-html # python3 -m pytest / python3 -m pytest --html=report.html
+pytest-html # python3 -m pytest / python3 -m pytest --html=./docs/tests/report.html
 # Pylint is used to check the code quality
 pylint # pylint src/calculator.py
 # Selenium is used to run the tests

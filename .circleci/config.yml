@@ -32,13 +32,9 @@ jobs:
             echo "hasta aqui"
             ls -l ~/app
       - persist_to_workspace:
-          root: /
+          root: ~/app
           paths:
-            - app
-      - persist_to_workspace:
-          root: /
-          paths:
-            - env
+            - ~/app
   # Job name
   app-tests:
     # Default configuration

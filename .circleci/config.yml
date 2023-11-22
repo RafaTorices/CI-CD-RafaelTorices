@@ -24,22 +24,32 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install python3-pip
+            python3 -m venv env
+            source env/bin/activate
+            pip install -r requirements.txt
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - env
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - app
   # Job name
   app-tests:
     # Default configuration
     <<: *defaults
     # Steps that will be executed
     steps:
-      # Checkout the code from the repository
-      - checkout
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Source env
+          command: |
+            source env/bin/activate
       # Create directorys for test results
       - run: mkdir docs-tests
       - run: mkdir docs-test-reports
-      # Install dependencies
-      - run:
-          name: Install dependencies
-          command: |
-            pip install -r requirements.txt
       # Run linter pylint
       - run:
           name: Run linter pylint
@@ -70,13 +80,10 @@ jobs:
     <<: *defaults
     # Steps that will be executed
     steps:
-      # Checkout the code from the repository
-      - checkout
-      # Install dependencies
       - run:
-          name: Install dependencies
+          name: Source env
           command: |
-            pip install -r requirements.txt
+            source env/bin/activate
       # Create directorys for documentation of code app
       - run: mkdir docs-html
       # Generate documentation with pdoc

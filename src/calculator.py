@@ -191,7 +191,7 @@ def print_result(result):
         float: Result of the operation
     """
     print("\n\n----------------------")
-    print("\n\nRESULT = ")
+    print("\n\nTHE RESULT = ")
     print(result)
     print("----------------------\n\n")
 

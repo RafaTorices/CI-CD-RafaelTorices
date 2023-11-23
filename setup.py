@@ -5,13 +5,17 @@ setup(
     version="1.0.0",
     author="RafaelTorices",
     packages=find_packages(),
+    include_package_data=True,
     install_requires=[
-        # Lista de tus dependencias si las tienes
+        "Flask",
     ],
     entry_points={
         "console_scripts": [
-            "calculator=src.calculator:calculator",
+            "calculator=src.calculator:app.run",
         ],
+    },
+    package_data={
+        "calculator": ["templates/*.html"],
     },
     classifiers=[
         "Programming Language :: Python :: 3",

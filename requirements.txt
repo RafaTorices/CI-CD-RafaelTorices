@@ -24,3 +24,5 @@ pdoc # pdoc src/calculator.py -o ./docs
 build # python3 -m build
 # Flask is used to run the web app
 flask
+# Setuptools is used to install the package
+setuptools

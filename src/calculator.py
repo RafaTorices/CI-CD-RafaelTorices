@@ -11,7 +11,7 @@ from flask import Flask, render_template, request
 
 
 # Initialize the Flask application
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 
 
 # Routes of the application flask

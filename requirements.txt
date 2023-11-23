@@ -20,4 +20,5 @@ selenium
 python-dotenv
 # Pdoc is used to generate the documentation
 pdoc # pdoc src/calculator.py -o ./docs
-
+# Build is used to build the package for distribution of app
+build # python3 -m build

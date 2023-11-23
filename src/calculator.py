@@ -1,130 +1,70 @@
-# Calculator.py
-# Example Python calculator application in terminal
+# calculator.py
+# Example Simple Python Flask Calculator Application Web
 
 """
 Calculator functions for doing math operations on numbers.
 """
 
+# Dependencies - Flask, render_template, request, math
 import math
+from flask import Flask, render_template, request
 
 
-def calculator():
+# Initialize the Flask application
+app = Flask(__name__)
+
+
+# Routes of the application flask
+@app.route("/", methods=["GET", "POST"])
+def index():
     """
-    Function to run the calculator
+    Function index to run the calculator
 
     Args:
-        user_choice (int): User choice
-
-    Returns:
-        result (int): Int number result of the selected operation
-    """
-    while True:
-        # Selection of the user
-        user_choice = read_user_choice()
-        # If not exit, do the operation
-        if not is_exit(user_choice):
-            # Do the operation
-            result = operation(user_choice)
-            # Show result in the screen
-            print_result(result)
-        else:
-            # Is exit, so break the loop
-            break
-
-
-def read_user_choice():
-    """
-    Shows the menu and reads the user choice
-    If the user choice is not valid, it will ask again
-
-    Args:
-        user_choice (int): User choice
-
-    Returns:
-        user_choice (int): int number User choice
-    """
-    # Initialize the user choice as invalid
-    user_choice = -1
-    # Show the menu until the user choice is valid
-    while user_choice == -1:
-        print("----------------------")
-        print("*** CALCULATOR APP ***")
-        print("----------------------")
-        print("Select an option:")
-        print("-----------------")
-        print("1.ADD")
-        print("2.SUBTRACT")
-        print("3.MULTIPLY")
-        print("4.DIVIDE")
-        print("5.POW")
-        print("-------------------")
-        print("0.EXIT")
-        print("-------------------")
-        # Read the user choice
-        try:
-            user_choice = int(input("Enter your choice:"))
-            # If the user choice is not between 0 and 5 return -1
-            if (user_choice < 0) or (user_choice > 5):
-                print("Invalid choice. Please try again.")
-                user_choice = -1
-        except ValueError:  # If the user choice is not valid
-            print("Invalid choice. Please try again.")
-            user_choice = -1
-    # If the user choice is valid, return it
-    return user_choice
-
-
-def operation(user_choice):
-    """
-    Function to do the operation selected by the user whith the numbers
-    introduced
-
-    Args:
-        user_choice (int): User choice
         number1 (float): First number
         number2 (float): Second number
+        operation (int): Operation to do
 
     Returns:
-        result (float): Float number result of the operation
+        result (string): Result of the operation/exception
     """
-    try:
-        # Read the numbers
-        number1 = float(input("Enter the first number:"))
-        number2 = float(input("Enter the second number:"))
-        # Do the operation selected by the user choice with the numbers write
-        # If the user choice = 1, do the sum
-        if user_choice == 1:
-            result = add(number1, number2)
-        # If the user choice = 2, do the subtraction
-        elif user_choice == 2:
-            result = subtract(number1, number2)
-        # If the user choice = 3, do the multiplication
-        elif user_choice == 3:
-            result = multiply(number1, number2)
-        # If the user choice = 4, do the division
-        elif user_choice == 4:
-            result = divide(number1, number2)
-        # If the user choice = 5, do the pow
-        elif user_choice == 5:
-            result = mathpow(number1, number2)
-        # Return the result
-        return result
-    except ValueError:
-        return "Invalid number. Please try again."
-
-
-def is_exit(user_choice):
-    """
-    Exit the calculator if the user wants to quit
-
-    Args:
-        user_choice (int): User choice
-
-    Returns:
-        bool: True if the user wants to quit, False otherwise
-    """
-    # Return True if the user choice is 0 (EXIT)
-    return user_choice == 0
+    # Initialize the result to None
+    result = None
+    # Initialize the operation to 1 (add)
+    operation = 1
+    # Check if the request method is POST
+    if request.method == "POST":
+        try:
+            # Get the values from the form
+            number1 = float(request.form["number1"])
+            number2 = float(request.form["number2"])
+            operation = int(request.form["operation"])
+            # If the operation is add
+            if operation == 1:
+                # Do the operation
+                result = add(number1, number2)
+            # If the operation is subtract
+            elif operation == 2:
+                # Do the operation
+                result = subtract(number1, number2)
+            # If the operation is multiply
+            elif operation == 3:
+                # Do the operation
+                result = multiply(number1, number2)
+            # If the operation is divide
+            elif operation == 4:
+                # Do the operation
+                result = divide(number1, number2)
+            # If the operation is pow
+            elif operation == 5:
+                # Do the operation
+                result = mathpow(number1, number2)
+        # If the values are not numbers, show the error
+        except ValueError:
+            # Show the error in the screen
+            result = "* Sorry, enter numbers please *"
+    # Render the template with the result
+    return render_template("index.html", result=result)
 
 
 def add(number1, number2):
@@ -200,19 +140,6 @@ def mathpow(number1, number2):
     return math.pow(number1, number2)
 
 
-def print_result(result):
-    """
-    Print the result of the operation in the screen
-
-    Args:
-        result (float): Result of the operation
-
-    Returns:
-        float: Result of the operation
-    """
-    print("----------------------")
-    print(f"RESULT = {result}")
-
-
+# Run the application
 if __name__ == "__main__":
-    calculator()
+    app.run(debug=False)

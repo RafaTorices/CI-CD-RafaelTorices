@@ -22,3 +22,5 @@ python-dotenv
 pdoc # pdoc src/calculator.py -o ./docs
 # Build is used to build the package for distribution of app
 build # python3 -m build
+# Flask is used to run the web app
+flask

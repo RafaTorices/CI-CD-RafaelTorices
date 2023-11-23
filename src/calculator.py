@@ -5,6 +5,8 @@
 Calculator functions for doing math operations on numbers.
 """
 
+import math
+
 
 def calculator():
     """
@@ -45,23 +47,24 @@ def read_user_choice():
     user_choice = -1
     # Show the menu until the user choice is valid
     while user_choice == -1:
-        print("-------------------")
+        print("----------------------")
         print("*** CALCULATOR APP ***")
-        print("-------------------")
+        print("----------------------")
         print("Select an option:")
-        print("-------------------")
+        print("-----------------")
         print("1.ADD")
         print("2.SUBTRACT")
         print("3.MULTIPLY")
         print("4.DIVIDE")
+        print("5.POW")
         print("-------------------")
         print("0.EXIT")
         print("-------------------")
         # Read the user choice
         try:
             user_choice = int(input("Enter your choice:"))
-            # If the user choice is not between 0 and 4 return -1
-            if (user_choice < 0) or (user_choice > 4):
+            # If the user choice is not between 0 and 5 return -1
+            if (user_choice < 0) or (user_choice > 5):
                 print("Invalid choice. Please try again.")
                 user_choice = -1
         except ValueError:  # If the user choice is not valid
@@ -101,6 +104,9 @@ def operation(user_choice):
         # If the user choice = 4, do the division
         elif user_choice == 4:
             result = divide(number1, number2)
+        # If the user choice = 5, do the pow
+        elif user_choice == 5:
+            result = mathpow(number1, number2)
         # Return the result
         return result
     except ValueError:
@@ -180,6 +186,20 @@ def divide(number1, number2):
         return "Division by zero is not allowed !!!!!"
 
 
+def mathpow(number1, number2):
+    """
+    Function to calculte the pow used two numbers, number1^number2
+
+    Args:
+        number1 (float): First number
+        number2 (float): Second number
+
+    Returns:
+        float: Pow of number1^number2
+    """
+    return math.pow(number1, number2)
+
+
 def print_result(result):
     """
     Print the result of the operation in the screen
@@ -190,10 +210,8 @@ def print_result(result):
     Returns:
         float: Result of the operation
     """
-    print("\n\n----------------------")
-    print("\n\nTHE RESULT = ")
-    print(result)
-    print("----------------------\n\n")
+    print("----------------------")
+    print(f"RESULT = {result}")
 
 
 if __name__ == "__main__":

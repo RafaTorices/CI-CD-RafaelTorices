@@ -35,3 +35,10 @@ def test_division():
     Function to test the divide function
     """
     assert 5 == calculator.divide(25, 5)
+
+
+def test_mathpow():
+    """
+    Function to test the mathpow function
+    """
+    assert 100 == calculator.mathpow(10, 2)

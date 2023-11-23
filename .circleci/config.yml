@@ -167,9 +167,6 @@ workflows:
             tags:
               only:
                 - /^v.*/
-            branches:
-              ignore:
-                - /.*/
       - app-deploy:
           requires:
             - app-build

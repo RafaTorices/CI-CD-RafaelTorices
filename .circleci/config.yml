@@ -105,7 +105,7 @@ jobs:
           path: docs-html
           destination: docs-html
   # Job name
-  app-build-package:
+  app-deploy:
     # Default configuration
     <<: *defaults
     # Steps that will be executed
@@ -119,23 +119,11 @@ jobs:
             # Source env
             source env/bin/activate
             # Build package app
-            pip install build
             python3 -m build
-  # Job name
-  app-deploy:
-    # Default configuration
-    <<: *defaults
-    # Steps that will be executed
-    steps:
-      # Attach the workspace from the previous job for persisting data
-      - attach_workspace:
-          at: ~/app
-      - run:
-          name: Deploy App
-          command: |
-            # Run app
-            python3 -m pip install dist/calculator-1.0.0.tar.gz
-            calculator
+      - store_artifacts:
+          path: dist
+          destination: dist
+TODO: create artefact of package on dockerhub
 # Workflows that will be executed
 workflows:
   # Workflow name
@@ -143,37 +131,18 @@ workflows:
     # Jobs that will be executed
     jobs:
       # Job name
-      - app-build:
-          filters:
-            branches:
-              only:
-                - develop
+      - app-build
       - app-tests:
           requires:
             - app-build
-          filters:
-            branches:
-              only:
-                - develop
       - app-docs:
           requires:
             - app-tests
-          filters:
-            branches:
-              only:
-                - develop
-      - app-build-package:
+      - app-deploy:
           requires:
             - app-build
             - app-tests
             - app-docs
-          filters:
-            branches:
-              only:
-                - main
-      - app-deploy:
-          requires:
-            - app-build-package
           filters:
             branches:
               only:

@@ -27,7 +27,7 @@ def test_multiplication():
     """
     Function to test the multiply function
     """
-    assert 100 == calculator.multiply(10, 10)
+    assert 1000 == calculator.multiply(100, 10)
 
 
 def test_division():

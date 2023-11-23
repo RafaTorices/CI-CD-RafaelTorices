@@ -22,7 +22,7 @@ jobs:
       # Create virtual environment for python3
       # Install dependencies with pip of requirements.txt
       - run:
-          name: Install dependencies
+          name: Build App and Install Dependencies
           command: |
             sudo apt-get update
             sudo apt-get install python3-pip
@@ -46,7 +46,7 @@ jobs:
       - attach_workspace:
           at: ~/app
       - run:
-          name: Run tests
+          name: Run Lint Pylint
           command: |
             # Source env
             source env/bin/activate
@@ -54,7 +54,7 @@ jobs:
             pylint src/calculator.py
       # Run test coverage with pytest
       - run:
-          name: Run tests pytest coverage
+          name: Run Tests Coverage
           command: |
             # Source env
             source env/bin/activate
@@ -63,7 +63,7 @@ jobs:
             python3 -m pytest --cov=src
       # Run test with pytest
       - run:
-          name: Run tests pytest
+          name: Run Tests Pytest
           command: |
             # Source env
             source env/bin/activate
@@ -93,7 +93,7 @@ jobs:
       - attach_workspace:
           at: ~/app
       - run:
-          name: Generate documentation
+          name: Generate Docs
           command: |
             # Create directorys for documentation of code app
             mkdir docs-html
@@ -115,7 +115,7 @@ jobs:
       - attach_workspace:
           at: ~/app
       - run:
-          name: Release package
+          name: Build Release Package
           command: |
             # Source env
             source env/bin/activate
@@ -134,20 +134,15 @@ jobs:
       - attach_workspace:
           at: ~/app
       - run:
-          name: Build package
+          name: Build Docker Image
           command: |
-            # Source env
-            source env/bin/activate
-            # Build package app
-            python3 -m build
-      - store_artifacts:
-          path: dist
-          destination: dist
-TODO: create artefact of package on dockerhub
+            docker build -t rafacv99/pycalculator:latest .
+            docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
+            docker push rafacv99/pycalculator:latest
 # Workflows that will be executed
 workflows:
   # Workflow name
-  app-build-tests-docs-deploy:
+  app-workflow:
     # Jobs that will be executed
     jobs:
       # Job name

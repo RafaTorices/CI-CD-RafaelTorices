@@ -106,6 +106,25 @@ jobs:
           path: docs-html
           destination: docs-html
   # Job name
+  app-release:
+    # Default configuration
+    <<: *defaults
+    # Steps that will be executed
+    steps:
+      # Attach the workspace from the previous job for persisting data
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Release package
+          command: |
+            # Source env
+            source env/bin/activate
+             # Build release package app
+            python3 -m build
+      - store_artifacts:
+          path: dist
+          destination: dist
+  # Job name
   app-deploy:
     # Default configuration
     <<: *defaults
@@ -138,7 +157,19 @@ workflows:
             - app-build
       - app-docs:
           requires:
+            - app-build
+      - app-release:
+          requires:
+            - app-build
             - app-tests
+            - app-docs
+          filters:
+            tags:
+              only:
+                - /^v.*/
+            branches:
+              ignore:
+                - /.*/
       - app-deploy:
           requires:
             - app-build

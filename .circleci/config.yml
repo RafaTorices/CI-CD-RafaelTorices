@@ -134,6 +134,7 @@ jobs:
     steps:
       # Checkout the code from the repository
       - checkout
+      - setup_remote_docker
       # Attach the workspace from the previous job for persisting data
       - attach_workspace:
           at: ~/app

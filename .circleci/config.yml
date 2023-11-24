@@ -128,7 +128,7 @@ jobs:
   app-deploy:
     working_directory: ~/app
     docker:
-      - image: docker:latest
+      - image: docker:stable
     # Steps that will be executed
     steps:
       # Attach the workspace from the previous job for persisting data

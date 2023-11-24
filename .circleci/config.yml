@@ -140,8 +140,9 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker --version
-            # docker build -t rafacv99/pycalculator:latest .
+            ls -l
+            docker build -t rafacv99/pycalculator:latest .
+            docker images
             # docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
             # docker push rafacv99/pycalculator:latest
 # Workflows that will be executed
@@ -155,9 +156,17 @@ workflows:
       - app-tests:
           requires:
             - app-build
+          filters:
+            branches:
+              ignore:
+                - main
       - app-docs:
           requires:
             - app-build
+          filters:
+            branches:
+              ignore:
+                - main
       - app-release:
           requires:
             - app-build

@@ -39,8 +39,8 @@ jobs:
       # Restore the virtual environment for the next job for persisting data
       - restore_cache:
           keys:
-            - python-dependencies-{{ checksum "requirements.txt" }}
-            - python-dependencies-
+            - python-dependencies1-{{ checksum "requirements.txt" }}
+            - python-dependencies1-
       # Install package python3-pip for install dependencies
       # Create virtual environment for python3
       # Install dependencies with pip of requirements.txt
@@ -56,7 +56,7 @@ jobs:
             pip install --upgrade pip
       # Save the virtual environment for the next job for persisting data
       - save_cache:
-          key: python-dependencies-{{ checksum "requirements.txt" }}
+          key: python-dependencies1-{{ checksum "requirements.txt" }}
           paths:
             - ./env
             - /usr/local/lib/python3

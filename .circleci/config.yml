@@ -16,7 +16,6 @@ executors:
     environment:
       IMAGE_TAG: rafacv99/pycalculator:latest
       DOCKERHUB_USERNAME: rafacv99
-      DOCKERHUB_PASS: $DOCKERHUB_PASS
     # Docker image
     docker:
       - image: docker:stable # Docker image stable
@@ -177,6 +176,7 @@ jobs:
       - run:
           name: Push Docker Image
           command: |
+            env
             echo "${DOCKERHUB_USERNAME}"
             echo "${DOCKERHUB_PASS}"
             echo "${DOCKERHUB_PASS}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin

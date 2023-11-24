@@ -129,7 +129,7 @@ jobs:
     # Executor that will be used
     docker:
       - image: docker:stable
-    working_directory: ~/app
+    # working_directory: ~/app
     # Steps that will be executed
     steps:
       # Checkout the code from the repository
@@ -140,9 +140,10 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker build -t rafacv99/pycalculator:latest .
-            docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
-            docker push rafacv99/pycalculator:latest
+            docker --version
+            # docker build -t rafacv99/pycalculator:latest .
+            # docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
+            # docker push rafacv99/pycalculator:latest
 # Workflows that will be executed
 workflows:
   # Workflow name
@@ -172,8 +173,6 @@ workflows:
       - app-deploy:
           requires:
             - app-build
-            - app-tests
-            - app-docs
           filters:
             branches:
               only:

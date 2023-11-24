@@ -161,7 +161,10 @@ jobs:
           name: Build Docker Image
           command: |
             docker build --tag "${IMAGE_TAG}" .
-            docker images
+      - persist_to_workspace:
+          root: ~/app
+          paths:
+            - .
   app-deploy-push:
     # Directory where the job will be executed
     working_directory: ~/app

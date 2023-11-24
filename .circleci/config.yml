@@ -133,6 +133,7 @@ jobs:
   app-deploy:
     # Executor that will be used
     executor: docker-publisher
+    working_directory: ~/app
     # Steps that will be executed
     steps:
       # Attach the workspace from the previous job for persisting data

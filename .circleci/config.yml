@@ -176,9 +176,7 @@ jobs:
       - run:
           name: Push Docker Image
           command: |
-            env
-            echo "${DOCKERHUB_USERNAME}"
-            echo "${DOCKERHUB_PASS}"
+            docker images
             echo "${DOCKERHUB_PASS}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
             docker push "${IMAGE_TAG}"
 # Workflows that will be executed

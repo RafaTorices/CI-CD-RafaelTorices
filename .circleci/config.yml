@@ -129,7 +129,7 @@ jobs:
     # Executor that will be used
     docker:
       - image: docker:stable
-    # working_directory: ~/app
+    working_directory: ~/app
     # Steps that will be executed
     steps:
       # Checkout the code from the repository

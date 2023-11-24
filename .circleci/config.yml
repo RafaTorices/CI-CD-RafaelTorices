@@ -143,7 +143,7 @@ jobs:
           path: dist
           destination: dist
   # Job name
-  app-deploy-build:
+  app-deploy:
     # Directory where the job will be executed
     working_directory: ~/app
     # Executor that will be used
@@ -161,24 +161,6 @@ jobs:
           name: Build Docker Image
           command: |
             docker build --tag "${IMAGE_TAG}" .
-      - persist_to_workspace:
-          root: ~/app
-          paths:
-            - .
-  app-deploy-push:
-    # Directory where the job will be executed
-    working_directory: ~/app
-    # Executor that will be used
-    executor: docker-publisher
-    steps:
-      # Config remote docker for execute docker commands
-      - setup_remote_docker
-      # Attach the workspace from the previous job for persisting data
-      - attach_workspace:
-          at: ~/app
-      - run:
-          name: Push Docker Image
-          command: |
             docker images
             echo "${DOCKERHUB_PASS}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
             docker push "${IMAGE_TAG}"
@@ -216,16 +198,9 @@ workflows:
             branches:
               ignore:
                 - main
-      - app-deploy-build:
+      - app-deploy:
           requires:
             - app-build
-          filters:
-            branches:
-              only:
-                - main
-      - app-deploy-push:
-          requires:
-            - app-deploy-build
           filters:
             branches:
               only:

@@ -175,6 +175,7 @@ jobs:
             docker images
             echo "${DOCKERHUB_PASS}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
             docker push "${IMAGE_TAG}"
+
 # Workflows that will be executed
 workflows:
   # Workflow name

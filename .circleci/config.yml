@@ -15,6 +15,8 @@ executors:
     # Environment variables
     environment:
       IMAGE_TAG: rafacv99/pycalculator:latest
+      DOCKERHUB_USERNAME: rafacv99
+      DOCKERHUB_PASS: $DOCKERHUB_PASS
     # Docker image
     docker:
       - image: docker:stable # Docker image stable
@@ -175,7 +177,7 @@ jobs:
       - run:
           name: Push Docker Image
           command: |
-            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+            echo "${DOCKERHUB_PASS}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
             docker push "${IMAGE_TAG}"
 # Workflows that will be executed
 workflows:

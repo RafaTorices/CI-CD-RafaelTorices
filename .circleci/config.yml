@@ -128,12 +128,15 @@ jobs:
   app-deploy:
     # Executor that will be used
     docker:
+      # Docker image stable
       - image: docker:stable
+    # Directory where the job will be executed
     working_directory: ~/app
     # Steps that will be executed
     steps:
       # Checkout the code from the repository
       - checkout
+      # Config remote docker for execute docker commands
       - setup_remote_docker
       # Attach the workspace from the previous job for persisting data
       - attach_workspace:
@@ -141,12 +144,10 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            ls -l
-            docker --version
-            #docker build -t rafacv99/pycalculator:latest .
+            docker build -t rafacv99/pycalculator:latest .
+            docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
             docker images
-            # docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
-            # docker push rafacv99/pycalculator:latest
+            docker push rafacv99/pycalculator:latest
 # Workflows that will be executed
 workflows:
   # Workflow name

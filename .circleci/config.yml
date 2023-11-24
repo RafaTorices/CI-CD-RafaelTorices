@@ -59,8 +59,7 @@ jobs:
           key: python-dependencies-{{ checksum "requirements.txt" }}
           paths:
             - ./env
-            - .cache/pip
-            - /usr/local/lib/python3.11
+            - /usr/local/lib/python3
           #key: v1-dependencies-{{ checksum "requirements.txt" }}
       # Save the virtual environment for the next job for persisting data
       - persist_to_workspace:

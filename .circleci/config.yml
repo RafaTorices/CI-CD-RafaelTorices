@@ -2,12 +2,29 @@
 
 # Version CircleCI
 version: 2.1
+
+# Executors that will be used
+executors:
+  # Executor name
+  docker-builder:
+    # Docker image
+    docker:
+      - image: cimg/python:3.11 # Python 3.11
+  # Executor name
+  docker-publisher:
+    # Environment variables
+    environment:
+      IMAGE_TAG: rafacv99/pycalculator:latest
+    # Docker image
+    docker:
+      - image: docker:stable # Docker image stable
+
 # Default configuration
 defaults: &defaults
   working_directory: ~/app # Working_directory: ~/app
-  # Docker image that will be used
-  docker:
-    - image: cimg/python:3.11 # Python 3.11
+  # Executor that will be used
+  executor: docker-builder
+
 # Jobs that will be executed
 jobs:
   # Job name
@@ -125,13 +142,11 @@ jobs:
           path: dist
           destination: dist
   # Job name
-  app-deploy:
-    # Executor that will be used
-    docker:
-      # Docker image stable
-      - image: docker:stable
+  app-deploy-build:
     # Directory where the job will be executed
     working_directory: ~/app
+    # Executor that will be used
+    executor: docker-publisher
     # Steps that will be executed
     steps:
       # Checkout the code from the repository
@@ -144,10 +159,24 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker build -t rafacv99/pycalculator:latest .
-            docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
+            docker build --tag "${IMAGE_TAG}" .
             docker images
-            docker push rafacv99/pycalculator:latest
+  app-deploy-push:
+    # Directory where the job will be executed
+    working_directory: ~/app
+    # Executor that will be used
+    executor: docker-publisher
+    steps:
+      # Config remote docker for execute docker commands
+      - setup_remote_docker
+      # Attach the workspace from the previous job for persisting data
+      - attach_workspace:
+          at: ~/app
+      - run:
+          name: Push Docker Image
+          command: |
+            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+            docker push "${IMAGE_TAG}"
 # Workflows that will be executed
 workflows:
   # Workflow name
@@ -182,9 +211,16 @@ workflows:
             branches:
               ignore:
                 - main
-      - app-deploy:
+      - app-deploy-build:
           requires:
             - app-build
+          filters:
+            branches:
+              only:
+                - main
+      - app-deploy-push:
+          requires:
+            - app-deploy-build
           filters:
             branches:
               only:

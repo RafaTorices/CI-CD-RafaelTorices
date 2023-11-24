@@ -8,6 +8,11 @@ defaults: &defaults
   # Docker image that will be used
   docker:
     - image: cimg/python:3.11 # Python 3.11
+executors:
+  docker-publisher:
+    # Use `docker:stable` as the Docker image for this executor
+    docker:
+      - image: docker:stable
 # Jobs that will be executed
 jobs:
   # Job name
@@ -126,9 +131,8 @@ jobs:
           destination: dist
   # Job name
   app-deploy:
-    working_directory: ~/app
-    docker:
-      - image: docker:stable
+    # Executor that will be used
+    executor: docker-publisher
     # Steps that will be executed
     steps:
       # Attach the workspace from the previous job for persisting data

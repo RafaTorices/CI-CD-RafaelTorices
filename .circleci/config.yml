@@ -141,7 +141,8 @@ jobs:
           name: Build Docker Image
           command: |
             ls -l
-            docker build -t rafacv99/pycalculator:latest .
+            docker --version
+            #docker build -t rafacv99/pycalculator:latest .
             docker images
             # docker tag rafacv99/pycalculator:latest rafacv99/pycalculator:latest
             # docker push rafacv99/pycalculator:latest

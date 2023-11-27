@@ -14,6 +14,8 @@ pytest-cov # python3 -m pytest --cov=src
 pytest-html # python3 -m pytest / python3 -m pytest --html=./docs/tests/report.html
 # Pylint is used to check the code quality
 pylint # pylint src/calculator.py
+# Flake8 is used to check the code quality
+flake8 # flake8 src/calculator.py
 # Selenium is used to run the tests
 selenium
 # Dotenv is used to load the environment variables

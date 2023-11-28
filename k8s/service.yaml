@@ -1,0 +1,12 @@
+# Service resource for the keep-app deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: app
+  ports:
+    - port: 80
+      targetPort: 5000
+  type: ClusterIP

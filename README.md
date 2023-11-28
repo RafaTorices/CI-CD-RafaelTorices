@@ -10,16 +10,44 @@ This repository contains a simple application written in **Python** that uses th
 
 The repository is structured as follows:
 
-- **.circleci**: Contains the configuration file for CircleCI (**config.yml** is the file that contains the pipeline).
-- **argocd**: Contains the configuration files for ArgoCD (the **argoapp.yml** file contains the configuration of the application in ArgoCD). File **values.yaml** contains the values default for deploy Helm chart of ArgoCD.
-- **k8s**: Contains the Kubernetes manifests for the deployment of the application in the cluster (deployment, service, ingress) with ArgoCD.
-- **src**: Contains the application python code.
+- **.circleci**: Contains the configuration file for CircleCI
+
+  - **config.yml**: Contains the configuration of the pipeline for CircleCI.
+
+- [**argocd**](argocd/Readme.md): Contains the configuration files for ArgoCD ()
+
+  - **argoapp.yml** file contains the configuration of the application in ArgoCD
+  - **values.yaml** contains the values default for deploy Helm chart of ArgoCD.
+
+- [**k8s**](k8s/Readme.md): Contains the Kubernetes manifests for the deployment of the application in the cluster
+
+  - **deployment.yaml**: Contains the deployment of the application.
+  - **ingress.yaml**: Contains the ingress of the application.
+  - **service.yaml**: Contains the service of the application.
+
+- [**src**](src/Readme.md): Contains the application python code.
+
+  - **calculator.py**: Contains the code of the application.
+  - **\_\_init\_\_.py**: Contains the code to initialize the application.
+  - **templates/index.html**: Contains the html code template of the application.
+
 - **tests**: Contains the tests for the python application code.
+
+  - **\_\_init\_\_.py**: Contains the code to initialize the tests.
+  - **test_calculator.py**: Contains the tests for the application code.
+
+- **\_\_main\_\_.py**: Contains the code to initialize the application.
+
 - **.gitignore**: Contains the files that are ignored by git.
+
 - **Dockerfile**: Contains the instructions to create the docker image of the python application.
+
 - **MANIFEST.in**: Contains the instructions to package the python application.
+
 - **requirements.txt**: Contains the dependencies of the python application.
+
 - **README.md**: Contains the description of the repository (this file).
+
 - **setup.py**: Contains the instructions to package the python application.
 
 > ## Note
@@ -28,9 +56,9 @@ The repository is structured as follows:
 
 ## Github individual repositories
 
-- **Python application**: https://github.com/RafaTorices/CI-CD-APP-RafaelTorices
-- **ArgoCD application**: https://github.com/RafaTorices/CI-CD-ArgoCD-RafaelTorices
-- **K8s manifests**: https://github.com/RafaTorices/CI-CD-APP-RafaelTorices
+- **Python application**: https://github.com/RafaTorices/pycalculator
+- **ArgoCD configuration**: https://github.com/RafaTorices/example_cicd_argocd
+- **K8s manifests**: https://github.com/RafaTorices/example_k8s_deploy_app
 - **Docker image**: https://hub.docker.com/repository/docker/rafacv99/pycalculator/general
 
 ## Aplication
@@ -51,3 +79,27 @@ Contains the code of the application.
     - Flask: for the web application.
     - Build: for building the package of the application.
     - setuptools: for building the package of the application.
+
+## Gitflow
+
+---image gitflow---
+The repository uses the Gitflow workflow. The repository has two main branches:
+
+- **main**: Contains the stable code of the application.
+- **develop**: Contains the code in development of the application.
+
+The repository has two secondary branches:
+
+- **feature**: Contains the code of the new features of the application.
+- **hotfix**: Contains the code of the hotfixes of the application.
+- **release**: Contains the code of the releases of the application.
+
+## CI/CD pipeline
+
+The CI/CD pipeline is created using CircleCI. The pipeline is triggered when a commit is made to:
+
+- **main** branch: The pipeline is triggered when a commit is made to the main branch. The pipeline executes the following steps:
+
+- **Build**: The pipeline builds the docker image of the application and pushes it to DockerHub.
+
+- **Test**: The pipeline tests the application using pytest and calculates the coverage using pytest-cov.

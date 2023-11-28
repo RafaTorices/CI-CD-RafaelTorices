@@ -1,0 +1,22 @@
+# Description: Deployment file for the keep-app application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app-container
+          image: rafacv99/pycalculator:latest # Image from DockerHub
+          ports:
+            - containerPort: 5000

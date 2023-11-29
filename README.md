@@ -151,9 +151,13 @@ The pipeline generates the following artifacts:
 
 - Docker image of the application in DockerHub: https://hub.docker.com/repository/docker/rafacv99/pycalculator/general
 
+> #### Note (DockerHub)
+>
+> The pipeline contains a job for the upload of the docker image to DockerHub. For use the job, you need to create a repository in DockerHub (<https://hub.docker.com/>) and you need to create a token in DockerHub and add it to the CircleCI environment variables with the name DOCKERHUB_PASS and used in the pipeline for generate the artifact.
+
 > #### Note (SonarCloud)
 >
-> The pipeline contains a job for the static code analysis using SonarCloud and use the SonarCloud Orb. For use the SonarCloud Orb, you need to create a project in SonarCloud (https://sonarcloud.io/) and link it to the repository Github. Also, you need to create a token in SonarCloud and add it to the CircleCI environment variables with the name SONAR_TOKEN. The context must be indicated in the workflow jobs.
+> The pipeline contains a job for the static code analysis using SonarCloud and use the SonarCloud Orb. For use the SonarCloud Orb, you need to create a project in SonarCloud (https://sonarcloud.io/) and link it to the repository Github. Also, you need to create a token in SonarCloud and add it to the CircleCI environment variables with the name SONAR_TOKEN. The context must be indicated in the workflow jobs. Also, you need to configure the file sonar-project-properties with parameters of the project in SonarCloud.
 
 > ![Alt text](images/sonarcloud.png) VIDEO SONARCLOUD
 

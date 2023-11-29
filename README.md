@@ -166,3 +166,29 @@ The pipeline generates the following artifacts:
 > The pipeline contains a job for the secrets detection using GitGuardian and use the GitGuardian Orb. But the job is commented because this project is private and the GitGuardian free plan only allows public projects. However, the job is configured and it has been checked that it works correctly as you can see in the following demo:
 
 > ![Alt text](images/gitguardian.png) VIDEO GITGUARDIAN
+
+## ArgoCD
+
+The application is deployed in a Kubernetes cluster using ArgoCD. The configuration files are in the [**argocd**](argocd/Readme.md) folder.
+The argoapp.yml file contains the configuration of the application in ArgoCD in the cluster k8s. The values.yaml file contains the values default for deploy Helm chart of ArgoCD.
+
+## K8s
+
+The application is deployed in a Kubernetes cluster using the manifests in the [**k8s**](k8s/Readme.md) folder.
+The deployment.yaml file contains the deployment of the application. The ingress.yaml file contains the ingress of the application. The service.yaml file contains the service of the application.
+
+## Sources
+
+- keepcoding.io
+- circleci.com
+- argoproj.github.io
+- kubernetes.io
+- sonarcloud.io
+- gitguardian.com
+- python.org
+- flask.palletsprojects.com
+- pytest.org
+- pdoc.dev
+- docker.com
+- hub.docker.com
+- github.com

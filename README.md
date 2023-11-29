@@ -149,7 +149,9 @@ The pipeline is triggered when:
 
 The pipeline generates the following artifacts:
 
-- Docker image of the application in DockerHub: https://hub.docker.com/repository/docker/rafacv99/pycalculator/general
+- Docker image of the application in DockerHub:
+
+  `https://hub.docker.com/repository/docker/rafacv99/pycalculator/general`
 
 > #### Note (DockerHub)
 >

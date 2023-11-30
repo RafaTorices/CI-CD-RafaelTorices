@@ -240,6 +240,8 @@ workflows:
       - app-deploy:
           requires:
             - app-build
+            - app-tests
+            - app-docs
           filters:
             branches:
               only:

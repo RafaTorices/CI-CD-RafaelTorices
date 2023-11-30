@@ -58,8 +58,6 @@ jobs:
             source env/bin/activate
             pip install -r requirements.txt
             pip install --upgrade pip
-      # Run sonarcloud/scan code analysis with SonarCloud
-      - sonarcloud/scan
       # Save the virtual environment for the next job for persisting data
       - save_cache:
           key: python-dependencies-{{ checksum "requirements.txt" }}
@@ -190,6 +188,8 @@ jobs:
       # Attach the workspace from the previous job for persisting data
       - attach_workspace:
           at: ~/app
+      # Run sonarcloud/scan code analysis with SonarCloud
+      - sonarcloud/scan
       - run:
           name: Build Docker Image
           command: |
@@ -243,6 +243,8 @@ workflows:
           context: SonarCloud
           requires:
             - app-build
+            - app-tests
+            - app-docs
           filters:
             branches:
               only:

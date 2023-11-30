@@ -63,12 +63,15 @@ This is a example of a ArgoCD project manifiest file. This file is used to creat
     ```
         kubectl get pods
     ```
+## Screenshots of the ArgoCD UI with the applications deployed since the Github repository
 
 ![Alt text](images/image1.png)
 
 ![Alt text](images/image2.png)
 
 ![Alt text](images/image3.png)
+
+## Screenshots of the ArgoCD UI with the applications deployed since the Helm chart of the application of the Github Pages repository
 
 ![Alt text](images/image4.png)
 

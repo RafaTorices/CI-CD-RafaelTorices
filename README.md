@@ -166,7 +166,7 @@ The pipeline generates the following artifacts:
 
 > #### Note (DockerHub)
 >
-> The pipeline contains a job for the upload of the docker image to DockerHub. For use the job, you need to create a repository in DockerHub (<https://hub.docker.com/>) and you need to create a token in DockerHub and add it to the CircleCI environment variables with the name DOCKERHUB_PASS and used in the pipeline for generate the artifact.
+> The pipeline contains a job for the upload of the docker image to DockerHub. For use the job, you need to create a repository in DockerHub (<https://hub.docker.com/>) and you need to create a token in DockerHub and add it to the CircleCI environment variables with the name DOCKERHUB_PASS asociated to the project and used it in the pipeline for generate the artifact.
 
 > #### Note (SonarCloud)
 >
@@ -176,7 +176,9 @@ The pipeline generates the following artifacts:
 
 > #### Note (GitGuardian)
 >
-> The pipeline contains a job for the secrets detection using GitGuardian and use the GitGuardian Orb. But the job is commented because this project is private and the GitGuardian free plan only allows public projects. However, the job is configured and it has been checked that it works correctly as you can see in the following demo:
+> The pipeline contains a job for the vulnerability analysis using GitGuardian and use the GitGuardian Orb. For use the GitGuardian Orb, you need to create a project in GitGuardian (https://www.gitguardian.com/) and link it to the repository Github. Also, you need to create a token in GitGuardian and add it to the CircleCI environment variables with the name GITGUARDIAN_TOKEN. Then, you need to configure the job gitguardian in the pipeline.
+
+
 
 > ![Alt text](images/gitguardian.png) VIDEO GITGUARDIAN
 

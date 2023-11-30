@@ -212,18 +212,10 @@ workflows:
           context: SonarCloud
           requires:
             - app-build
-          filters:
-            branches:
-              ignore:
-                - main
       - app-docs:
           context: SonarCloud
           requires:
             - app-build
-          filters:
-            branches:
-              ignore:
-                - main
       - app-release:
           context: SonarCloud
           requires:

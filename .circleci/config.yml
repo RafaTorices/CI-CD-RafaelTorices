@@ -188,6 +188,8 @@ jobs:
       # Attach the workspace from the previous job for persisting data
       - attach_workspace:
           at: ~/app
+      # Run sonarcloud/scan code analysis with SonarCloud
+      - sonarcloud/scan
       - run:
           name: Build Docker Image
           command: |

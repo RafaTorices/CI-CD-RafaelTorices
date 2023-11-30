@@ -2,7 +2,7 @@
 
 ### Author: RafaelTorices
 
-This is a example of a ArgoCD project manifiest file. This file is used to create a ArgoCD project and link it to a Git repository, in this case, the repository is a deployment of a simple python flask app web application in a Kubernetes cluster.
+This is a example of a ArgoCD project manifiest file. This file is used to create a ArgoCD project and link it to a Git repository, in this case, the repository is a deployment of a simple python flask app web application in a Kubernetes cluster. Also, `argopycalculator.yaml` file contains the configuration of the application in ArgoCD using the Helm chart of the application for deploy the application in the Kubernetes cluster controlled by ArgoCD.
 
 ![Alt text](images/image.png)
 
@@ -47,11 +47,19 @@ This is a example of a ArgoCD project manifiest file. This file is used to creat
 
 6.  Login with the user **admin** and the password obtained in the step 3.
 
-7.  Apply the manifiest file:
+7.  Apply the manifiest file `argoapp.yaml` to create the ArgoCD application obtained from the Github repository:
+
     ```
         kubectl apply -f argoapp.yaml
     ```
-8.  Check the application is running in the Kubernetes cluster:
+
+8.  Apply the manifiest file `argopycalculator.yaml` to create the ArgoCD application obtained from the Helm chart of the application of the Github Pages repository:
+
+    ```
+        kubectl apply -f argopycalculator.yaml
+    ```
+
+9.  Check the application is running in the Kubernetes cluster:
     ```
         kubectl get pods
     ```
@@ -61,3 +69,7 @@ This is a example of a ArgoCD project manifiest file. This file is used to creat
 ![Alt text](images/image2.png)
 
 ![Alt text](images/image3.png)
+
+![Alt text](images/image4.png)
+
+![Alt text](images/image5.png)

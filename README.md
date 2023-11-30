@@ -4,7 +4,7 @@ Repository for the CI/CD subject of the module KeepCoding DevOps Bootcamp
 
 ## Description
 
-This repository contains a simple application written in **Python** that uses the **Flask** framework. The application is a simple **_calculator web application_** with various operations (add, subtract, multiply, divide, power). The application is deployed in a **Kubernetes cluster** using **ArgoCD**. The application is automated using **CircleCI**. The application is tested using **pytest** and the coverage is calculated using **pytest-cov**. The application is linted using **pylint** and **flake8**. Also, the static code analysis is done using **SonarCloud**. All these tools have been used to create a CI/CD pipeline for the application.
+This repository contains a simple application written in **Python** that uses the **Flask** framework. The application is a simple **_calculator web application_** with various operations (add, subtract, multiply, divide, power). The application is deployed in a **Kubernetes cluster** using **ArgoCD**. The application is automated using **CircleCI**. The application is tested using **pytest** and the coverage is calculated using **pytest-cov**. The application is linted using **pylint** and **flake8**. Also, the static code analysis is done using **SonarCloud**. All these tools have been used to create a **CI/CD pipeline** for the application.
 
 ## Repository structure
 
@@ -17,9 +17,19 @@ The repository is structured as follows:
 - [**argocd**](argocd/Readme.md): Contains the configuration files for ArgoCD ()
 
   - **argoapp.yml** file contains the configuration of the application in ArgoCD
+  - **argopycalculator.yaml** file contains the configuration of the application in ArgoCD using the Helm chart of the application.
   - **values.yaml** contains the values default for deploy Helm chart of ArgoCD.
 
-- [**k8s**](k8s/Readme.md): Contains the Kubernetes manifests for the deployment of the application in the cluster
+- [**k8s/helm/app**](k8s/Readme.md): Contains the Helm chart for the deployment of the application in cluster Kubernetes
+
+  - **Chart.yaml**: Contains the metadata of the Helm chart.
+  - **values.yaml**: Contains the values default for deploy Helm chart of the application.
+  - **templates/**: Contains the resources of the Helm chart.
+    - **deployment.yaml**: Contains the deployment of the application.
+    - **ingress.yaml**: Contains the ingress of the application.
+    - **service.yaml**: Contains the service of the application.
+
+- [**k8s/k8s**](k8s/Readme.md): Contains the Kubernetes manifests for the deployment of the application in the cluster
 
   - **deployment.yaml**: Contains the deployment of the application.
   - **ingress.yaml**: Contains the ingress of the application.
@@ -61,6 +71,7 @@ The repository is structured as follows:
 - **ArgoCD configuration**: https://github.com/RafaTorices/example_cicd_argocd
 - **K8s manifests**: https://github.com/RafaTorices/example_k8s_deploy_app
 - **DockerHub image**: https://hub.docker.com/repository/docker/rafacv99/pycalculator/general
+- **Helm Chart PyCalculator**: https://rafatorices.github.io/example_helm_pycalculator/
 
 ## Aplication
 
@@ -172,25 +183,34 @@ The pipeline generates the following artifacts:
 ## ArgoCD
 
 The application is deployed in a Kubernetes cluster using ArgoCD. The configuration files are in the [**argocd**](argocd/Readme.md) folder.
-The argoapp.yml file contains the configuration of the application in ArgoCD in the cluster k8s. The values.yaml file contains the values default for deploy Helm chart of ArgoCD.
+
+The `argoapp.yml` file contains the configuration of the application in ArgoCD in the cluster k8s.
+
+The `values.yaml` file contains the values default for deploy Helm chart of ArgoCD in the cluster k8s.
+
+The `argopycalculator.yaml` file contains the configuration of the application in ArgoCD in the cluster k8s using the Helm chart of the application.
 
 ## K8s
 
-The application is deployed in a Kubernetes cluster using the manifests in the [**k8s**](k8s/Readme.md) folder.
-The deployment.yaml file contains the deployment of the application. The ingress.yaml file contains the ingress of the application. The service.yaml file contains the service of the application.
+[**k8s**](k8s/Readme.md) contains the Kubernetes manifests for the deployment of the application in the cluster k8s and folder k8s/helm/app contains the Helm chart for the deployment of the application in cluster k8s.
 
 ## Sources
 
-- keepcoding.io
-- circleci.com
-- argoproj.github.io
-- kubernetes.io
-- sonarcloud.io
-- gitguardian.com
-- python.org
-- flask.palletsprojects.com
-- pytest.org
-- pdoc.dev
-- docker.com
-- hub.docker.com
-- github.com
+- **Python**: https://www.python.org/
+- **Flask**: https://flask.palletsprojects.com/en/2.0.x/
+- **Pytest**: https://docs.pytest.org/en/6.2.x/
+- **Coverage**: https://coverage.readthedocs.io/en/coverage-5.5/
+- **Pylint**: https://www.pylint.org/
+- **Flake8**: https://flake8.pycqa.org/en/latest/
+- **pdoc**: https://pdoc3.github.io/pdoc/
+- **CircleCI**: https://circleci.com/
+- **SonarCloud**: https://sonarcloud.io/
+- **GitGuardian**: https://www.gitguardian.com/
+- **ArgoCD**: https://argoproj.github.io/argo-cd/
+- **Kubernetes**: https://kubernetes.io/es/
+- **Helm**: https://helm.sh/
+- **Docker**: https://www.docker.com/
+- **DockerHub**: https://hub.docker.com/
+- **Gitflow**: https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow
+- **Github pages**: https://pages.github.com/
+- **Github actions**: https://docs.github.com/en/actions

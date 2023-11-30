@@ -14,7 +14,7 @@ The repository is structured as follows:
 
   - **config.yml**: Contains the configuration of the pipeline for CircleCI.
 
-- [**argocd**](argocd/Readme.md): Contains the configuration files for ArgoCD ()
+- [**argocd**](argocd/Readme.md): Contains the configuration files for ArgoCD
 
   - **argoapp.yml** file contains the configuration of the application in ArgoCD
   - **argopycalculator.yaml** file contains the configuration of the application in ArgoCD using the Helm chart of the application.
@@ -60,9 +60,7 @@ The repository is structured as follows:
 
 - **setup.py**: Contains the instructions to package the python application.
 
-> ## Note
->
-> Each folder contains a README.md file with a description of its contents.
+> ## Note: each folder contains a README.md file with a description of its contents.
 
 ## Github individual repositories
 

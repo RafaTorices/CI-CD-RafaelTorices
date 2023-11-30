@@ -26,8 +26,8 @@ defaults: &defaults
   # Executor that will be used
   executor: docker-builder
 
-# orbs:
-#   sonarcloud: sonarsource/sonarcloud@2.0.0
+orbs:
+  ggshield: gitguardian/ggshield@volatile
 
 # Jobs that will be executed
 jobs:
@@ -200,6 +200,10 @@ workflows:
   app-workflow:
     # Jobs that will be executed
     jobs:
+      - ggshield/scan:
+          name: ggshield-scan # best practice is to name each orb job
+          base_revision: << pipeline.git.base_revision >>
+          revision: <<pipeline.git.revision>>
       # Job name
       - app-build:
           context: SonarCloud

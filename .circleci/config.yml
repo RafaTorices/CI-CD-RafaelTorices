@@ -27,7 +27,8 @@ defaults: &defaults
   executor: docker-builder
 
 orbs:
-  ggshield: gitguardian/ggshield@volatile
+  sonarcloud: sonarsource/sonarcloud@2.0.0 # SonarCloud orb for CircleCI
+  ggshield: gitguardian/ggshield@volatile # GitGuardian orb for CircleCI
 
 # Jobs that will be executed
 jobs:
@@ -123,13 +124,14 @@ jobs:
             python3 -m pytest --html=./docs-pytests-reports/report.html
             # Generate report xml of test results
             python3 -m pytest --junitxml=./docs-pytests-reports/report.xml
+      # Run sonarcloud/scan code analysis with SonarCloud
+      - sonarcloud/scan
       # Generate artifacts of test results
       - store_test_results:
           path: docs-pytests-reports/report.xml
       - store_artifacts:
           path: docs-pytests-reports
           destination: docs-pytests-reports
-      # - sonarcloud/scan
   # Job name
   app-docs:
     # Default configuration

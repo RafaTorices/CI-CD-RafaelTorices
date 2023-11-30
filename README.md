@@ -75,9 +75,13 @@ The repository is structured as follows:
 
 ## Aplication
 
-### **Calculator.py**
+### **Screenshots Calculator.py**
 
 ![Alt text](images/image.png)
+
+![Alt text](images/calc1.png)
+
+![Alt text](images/calc2.png)
 
     The application is a simple calculator that has the following operations with two numbers:
 
@@ -150,7 +154,7 @@ In resume, the pipeline has the following steps:
 
 - **orbs**: Used in the pipeline:
   - **SonarCloud**: For the static code analysis.
-  - **GitGuardian**: For the secrets detection.
+  - **GitGuardian**: For the secrets detection and vulnerability analysis.
 
 The pipeline is triggered when:
 
@@ -167,6 +171,12 @@ The pipeline generates the following artifacts:
 > ## Note (DockerHub)
 >
 > The pipeline contains a job for the upload of the docker image to DockerHub. For use the job, you need to create a repository in DockerHub (<https://hub.docker.com/>) and you need to create a token in DockerHub and add it to the CircleCI environment variables with the name DOCKERHUB_PASS asociated to the project and used it in the pipeline for generate the artifact.
+>
+> ![Alt text](images/screen.png)
+>
+> ![Alt text](images/dh1.png)
+>
+> ![Alt text](images/dh2.png)
 
 > ## Note (SonarCloud)
 >
@@ -198,9 +208,19 @@ The pipeline generates the following artifacts:
 >
 > The pipeline contains a job for the vulnerability analysis using GitGuardian and use the GitGuardian Orb. For use the GitGuardian Orb, you need to create a project in GitGuardian (https://www.gitguardian.com/) and link it to the repository Github. Also, you need to create a token in GitGuardian and add it to the CircleCI environment variables with the name GITGUARDIAN_TOKEN. Then, you need to configure the job gitguardian in the pipeline.
 
+![Alt text](images/gg1.png)
 
+![Alt text](images/gg2.png)
 
-> ![Alt text](images/gitguardian.png) VIDEO GITGUARDIAN
+![Alt text](images/gg3.png)
+
+![Alt text](images/gg4.png)
+
+![Alt text](images/gg5.png)
+
+![Alt text](images/gg6.png)
+
+![Alt text](images/gg7.png)
 
 ## ArgoCD
 
@@ -211,6 +231,32 @@ The `argoapp.yml` file contains the configuration of the application in ArgoCD i
 The `values.yaml` file contains the values default for deploy Helm chart of ArgoCD in the cluster k8s.
 
 The `argopycalculator.yaml` file contains the configuration of the application in ArgoCD in the cluster k8s using the Helm chart of the application.
+
+## Resources argocd kubernetes
+
+![Alt text](images/argocd.png)
+
+## Resources app calculator kubernetes
+
+![Alt text](images/argocd1.png)
+
+## Screenshots of the ArgoCD UI with the applications deployed since the Github repository
+
+![Alt text](images/image0.png)
+
+![Alt text](images/image1.png)
+
+![Alt text](images/image2.png)
+
+![Alt text](images/image3.png)
+
+## Screenshots of the ArgoCD UI with the applications deployed since the Helm chart of the application of the Github Pages repository
+
+![Alt text](images/image4.png)
+
+![Alt text](images/image5.png)
+
+
 
 ## K8s
 

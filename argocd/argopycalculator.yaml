@@ -9,9 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: pycalc
-    repoURL: https://rafatorices.github.io/example_helm_pycalculator/
-    targetRevision: "0.1.0"
+    chart: pycalc # Name of the chart that appears in the readme helm chart repository
+    repoURL: https://rafatorices.github.io/example_helm_pycalculator/ # URL of the helm chart repository
+    targetRevision: "0.1.0" # Version of the helm chart that appears in the index.yaml file of the helm chart repository
   syncPolicy:
     automated:
       prune: true

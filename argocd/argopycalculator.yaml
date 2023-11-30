@@ -9,9 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: app
-    repoURL: https://github.com/RafaTorices/example_helm_pycalculator
-    targetRevision: "1.16.0"
+    chart: pycalc
+    repoURL: https://rafatorices.github.io/example_helm_pycalculator/
+    targetRevision: "0.1.0"
   syncPolicy:
     automated:
       prune: true

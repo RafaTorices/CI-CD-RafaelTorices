@@ -228,6 +228,7 @@ workflows:
               ignore:
                 - main
       - app-release:
+          context: SonarCloud
           requires:
             - app-build
             - app-tests
@@ -240,6 +241,7 @@ workflows:
               ignore:
                 - main
       - app-deploy:
+          context: SonarCloud
           requires:
             - app-build
           filters:

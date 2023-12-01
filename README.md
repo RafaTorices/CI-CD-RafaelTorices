@@ -6,7 +6,9 @@ Repository for the CI/CD subject of the module KeepCoding DevOps Bootcamp
 
 This repository contains a simple application written in **Python** that uses the **Flask** framework. The application is a simple **_calculator web application_** with various operations (add, subtract, multiply, divide, power). The application is deployed in a **Kubernetes cluster** using **ArgoCD**. The application is automated using **CircleCI**. The application is tested using **pytest** and the coverage is calculated using **pytest-cov**. The application is linted using **pylint** and **flake8**. Also, the static code analysis is done using **SonarCloud**. All these tools have been used to create a **CI/CD pipeline** for the application.
 
-## Video Demo
+## Video Demo CI/CD Project
+
+Link to video Youtube: [Video Demo CI/CD Project](https://youtu.be/FPtVnZtDDOU)
 
 <video src="images/CICD.mp4" controls title="CI/CD-VIDEO DEMO"></video>
 

@@ -1,0 +1,109 @@
+# Workflow for the CI/CD pipeline for the Python app
+name: CI/CD Pipeline Python App
+run-name: ${{ github.actor }} - CI/CD Pipeline Python App
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow
+  push:
+    branches:
+      # Branch develop
+      - develop
+      # Branch main
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Jobs to run
+jobs:
+  # Build the app, run tests and generate docs
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Configures Python version
+      - name: Config Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+          # Create a cache for pip packages
+          cache: "pip"
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      # Run lint pylint
+      - name: Run Lint Pylint
+        run: |
+          pylint src/calculator.py
+      # Run tests pytest and coverage report
+      - name: Run tests
+        run: |
+          python3 -m pytest --cov=src --cov-report=xml:docs-covtests-reports/coverage.xml
+          coverage run -m pytest tests/test_calculator.py
+          coverage html -d ./docs-covtests-reports
+      # Upload coverage report as artifact
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs-covtests-reports
+          path: ./docs-covtests-reports
+      # Run docs pdoc
+      - name: Run docs
+        run: |
+          pdoc src/calculator.py -o ./docs-html
+      # Upload docs as artifact
+      - name: Upload docs
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs-html
+          path: ./docs-html
+      # Sonarcloud Scan
+      - name: Sonarcloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # GitGuardian Scan
+      - name: GitGuardian Scan
+        uses: GitGuardian/gg-shield-action@master
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+  # Deploy the app to DockerHub
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Check that the branch is main
+    if: github.ref == 'refs/heads/main'
+    # Needs the build job to be completed before with tests and docs and artifacts
+    needs: build
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      # Login to DockerHub with username and token from secrets
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Build and push Docker image
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          # Dockerfile location
+          context: .
+          push: true
+          # Docker image name and tag on DockerHub repository public
+          tags: |
+            rafacv99/pycalculator_flask:latest

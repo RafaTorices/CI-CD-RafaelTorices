@@ -6,6 +6,8 @@ Repository for the CI/CD subject of the module KeepCoding DevOps Bootcamp
 
 This repository contains a simple application written in **Python** that uses the **Flask** framework. The application is a simple **_calculator web application_** with various operations (add, subtract, multiply, divide, power). The application is deployed in a **Kubernetes cluster** using **ArgoCD**. The application is automated using **CircleCI**. The application is tested using **pytest** and the coverage is calculated using **pytest-cov**. The application is linted using **pylint** and **flake8**. Also, the static code analysis is done using **SonarCloud**. All these tools have been used to create a **CI/CD pipeline** for the application.
 
+> **Also, I have included a pipeline for Github actions that builds the Docker image of the application and uploads it to DockerHub, including the static code analysis using SonarCloud and the vulnerability analysis using GitGuardian.**
+
 ## Video Demo CI/CD Project (Youtube)
 
 [![Video Demo CI/CD Project](images/video.png)](https://youtu.be/FPtVnZtDDOU)
@@ -19,6 +21,11 @@ The repository is structured as follows:
 - **.circleci**: Contains the configuration file for CircleCI
 
   - **config.yml**: Contains the configuration of the pipeline for CircleCI.
+
+- **.github/workflows**: Contains the configuration file pipeline for Github actions
+
+  - **main.yml**: Pipeline for Github actions.
+  - **sonar-project.properties**: Contains the configuration of the project in SonarCloud.
 
 - [**argocd**](argocd/Readme.md): Contains the configuration files for ArgoCD
 
@@ -72,6 +79,7 @@ The repository is structured as follows:
 
 - **Python application**: https://github.com/RafaTorices/pycalculator
 - **CI/CD CircleCI**: https://github.com/RafaTorices/example_cicd_circleci
+- **CI/CD Github actions**: https://github.com/RafaTorices/cicd_ghactions
 - **ArgoCD configuration**: https://github.com/RafaTorices/example_cicd_argocd
 - **K8s manifests**: https://github.com/RafaTorices/example_k8s_deploy_app
 - **DockerHub image**: https://hub.docker.com/repository/docker/rafacv99/pycalculator/general
@@ -255,6 +263,22 @@ The pipeline generates the following artifacts:
 ![Alt text](images/gg6.png)
 
 ![Alt text](images/gg7.png)
+
+## Github actions
+
+The repository contains a pipeline for Github actions that builds the Docker image of the application and uploads it to DockerHub, including the static code analysis using SonarCloud and the vulnerability analysis using GitGuardian.
+
+![Alt text](images/gh1.png)
+
+![Alt text](images/gh2.png)
+
+![Alt text](images/gh3.png)
+
+![Alt text](images/gh4.png)
+
+![Alt text](images/gh5.png)
+
+![Alt text](images/gh6.png)
 
 ## ArgoCD
 

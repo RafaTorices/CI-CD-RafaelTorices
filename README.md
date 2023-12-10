@@ -284,6 +284,16 @@ The repository contains a pipeline for Github actions that builds the Docker ima
 
 The application is deployed in a Kubernetes cluster using ArgoCD. The configuration files are in the [**argocd**](argocd/Readme.md) folder.
 
+For use ArgoCD with Helm Charts, you need GitHUb Pages repository for the Helm Charts of the application. The repository is in the following link:
+
+`https://rafatorices.github.io/example_helm_pycalculator/`
+
+This repository contains the Helm chart of the application for use in ArgoCD.
+
+![Alt text](images/ghpage1.png)
+
+![Alt text](images/ghpage2.png)
+
 The `argoapp.yml` file contains the configuration of the application in ArgoCD in the cluster k8s.
 
 The `values.yaml` file contains the values default for deploy Helm chart of ArgoCD in the cluster k8s.
